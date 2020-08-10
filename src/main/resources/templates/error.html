@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="home::home_head"></head>
+<body class="blue_bgc">
+    <header th:replace="home::home_header"></header>
+    <main class="blue_bgc">
+        <div class="main_column clearfix">
+
+            <div class="main_column_left">
+                <div class="big_ref">
+                    <a class="bold" href="/error">Помилка</a>
+                </div>
+                <div class="central_blok clearfix">
+                    <div class="ni_data">
+                        <h2>Customized Error Page</h2>
+                        timestamp: <span th:text="${timestamp}"></span><br/>
+                        error: <span th:text="${error}"></span><br/>
+                        status: <span th:text="${status}"></span><br/>
+                        message: <span th:text="${message}"></span><br/>
+                        stacktrace: <pre th:text="${trace}"></pre><br/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main_column_right"></div>
+
+        </div>
+    </main>
+    <footer th:replace="home::home_footer"></footer>
+</body>
+</html>

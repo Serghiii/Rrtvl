@@ -1,0 +1,76 @@
+.paginationjs{
+    line-height: 1.6;
+    font-family: Marmelad,"Lucida Grande",Arial,"Hiragino Sans GB",Georgia,sans-serif;
+    font-size: 14px;
+    box-sizing: initial;
+}
+.paginationjs{
+    *zoom: 1;
+    display: inline-block; /* for this only */
+}
+.paginationjs.paginationjs-big{
+    font-size: 16px;
+}
+.paginationjs .paginationjs-pages{
+    float: left;
+}
+.paginationjs .paginationjs-pages ul{
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+.paginationjs .paginationjs-pages li{
+    float: left;
+    border: 1px solid #aaa;
+    border-right: none;
+    list-style: none;
+}
+.paginationjs .paginationjs-pages li>a{
+    min-width: 30px;
+    height: 28px;
+    line-height: 28px;
+    display: block;
+    background: #fff;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+    text-align: center;
+}
+.paginationjs .paginationjs-pages li:first-child, .paginationjs .paginationjs-pages li:first-child>a{
+    border-radius: 3px 0 0 3px;
+}
+.paginationjs .paginationjs-pages li.active{
+    border: none;
+}
+.paginationjs .paginationjs-pages li>a:hover{
+    background: #eee;
+}
+.paginationjs .paginationjs-pages li:last-child{
+    border-right: 1px solid #aaa;
+    border-radius: 0 3px 3px 0;
+}
+.paginationjs .paginationjs-pages li:last-child>a{
+    border-radius: 0 3px 3px 0;
+}
+.paginationjs .paginationjs-pages li.disabled>a{
+    opacity: 0.3;
+}
+.paginationjs .paginationjs-pages li.active>a{
+    height: 30px;
+    line-height: 30px;
+    background: #aaa;
+    color: #fff;
+}
+.paginationjs.paginationjs-big .paginationjs-pages li>a{
+    min-width: 36px;
+    height: 34px;
+    line-height: 34px;
+    font-size: 16px;
+}
+.paginationjs.paginationjs-big .paginationjs-pages li>a{
+    line-height: 36px;
+}
+.paginationjs.paginationjs-big .paginationjs-pages li.active>a{
+    height: 36px;
+    line-height: 36px;
+}

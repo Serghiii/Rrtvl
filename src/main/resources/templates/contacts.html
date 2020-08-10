@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <head th:replace="home::home_head"></head>
+    <script type="text/javascript" src="../static/js/contacts.js" th:src="@{/js/contacts.js}"></script>
+    <script src='https://www.google.com/recaptcha/api.js?hl=uk'></script>
+</head>
+<body class="blue_bgc">
+    <header th:replace="home::home_header"></header>
+    <main class="blue_bgc">
+        <div class="main_column clearfix">
+
+            <div class="main_column_left">
+                <div class="big_ref">
+                    <a class="bold" href="/contacts">Контакти</a>
+                </div>
+                <div class="central_blok clearfix">
+                    <p class="contact_info">Адреса:</p>
+                    <p class="contact_data">45007, Волинська обл., м.Ковель, вул. Варшавська, 5</p>
+                    <p class="contact_info">Робочі години:</p>
+                    <p class="contact_data">Пн-Чт: 8:00 - 17:15<br>Пт: 8:00 - 16:00</p>
+                    <p class="contact_info">Телефон:</p>
+                    <p class="contact_data">Приймальня: (03352)5-99-81</p>
+                    <p class="contact_info">Електронна адреса:</p>
+                    <p class="contact_data">Приймальня: <a class="mail_link" href="mailto:vfcrrt@gmail.com"><i class="far fa-envelope"></i>&nbsp;vfcrrt@gmail.com</a></p>
+                    <p class="contact_info">Мобільний додаток:</p>
+                    <p class="contact_data"><a download href="krrtvf-release.apk">
+                        <button class="btn">Завантажити файл <i class="fa fa-download"></i></button>
+                    </a></p>
+                    <p class="contact_info">Соціальні мережі:</p>
+                    <a class="fab fa-facebook soc_link" href="https://www.facebook.com/pages/Концерн-РРТ/379302548839081?rf=449337261848187" target="_blank" rel="noreferrer"></a>
+                </div>
+                <div class="big_ref">
+                    <a class="bold" href="/contacts">Зворотній звя'зок</a>
+                </div>
+                <div class="central_blok clearfix">
+                    <form class="contact_form">
+                        <p class="back_items_txt">Ім'я<br>
+                            <input class="back_items" name="name" type="text" maxlength="255">
+                            <span class="form_hint txt1"></span>
+                        </p>
+                        <p class="back_items_txt">E-mail<br>
+                            <input class="back_items" name="email" type="email" maxlength="255">
+                            <span class="form_hint txt2"></span>
+                        </p>
+                        <p class="back_items_txt">Тема повідомлення<br>
+                            <input class="back_items" name="topic" type="text" maxlength="255">
+                            <span class="form_hint txt3"></span>
+                        </p>
+                        <p class="back_items_txt">Текст повідомлення<br>
+                            <textarea class="back_items" name="topictxt" rows="6"></textarea>
+                            <span class="form_hint txt4"></span>
+                        </p>
+                        <div style="position: relative; margin-bottom: 10px">
+                            <div class="g-recaptcha" data-sitekey="6LfAxmMUAAAAAPFaLkS5kpv3ZtSY021Ln6H5JZxM"></div>
+                            <span class="form_hint txt5" style="position: absolute; left: 303px; top:0; font-size: 0.750em" ></span>
+                        </div>
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <button class="btback">Відправити</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="main_column_right"></div>
+
+        </div>
+    </main>
+    <footer th:replace="home::home_footer"></footer>
+</body>
+</html>

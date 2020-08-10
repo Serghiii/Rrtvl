@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="home::home_head"></head>
+<body class="blue_bgc">
+    <header th:replace="home::home_header"></header>
+    <link rel="stylesheet" href="../static/css/jquery.fancybox.min.css" th:href="@{/css/jquery.fancybox.min.css}" type="text/css" media="screen" />
+    <script type="text/javascript" src="../static/js/jquery.fancybox.min.js" th:src="@{/js/jquery.fancybox.min.js}"></script>
+    <main class="blue_bgc">
+        <div class="main_column clearfix">
+
+            <div class="main_column_left">
+                <div class="pagination_margin">
+                    <div class="big_ref">
+                        <a class="bold" href="/video?page=1">Відео</a>
+                    </div>
+                    <div class="central_blok clearfix">
+                        <div class="ni_data">
+                            <div class="cards">
+                                <div class="card" th:each="item:${video}">
+                                    <a data-fancybox data-width="640" data-height="360" th:href="'/cards/video/'+${item.id}+'/'+${item.videofilename}"><img class="card-img-top img-fluid" th:src="'/cards/video/'+${item.id}+'/'+${item.filename}" alt=""/><br><span th:utext="${item.title}+'<br>'+${#dates.format(item.date, 'dd.MM.yyyy')}"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pagination-container">
+                    <div class="paginationjs">
+                        <div class="paginationjs-pages">
+                            <ul th:utext="${pageband}">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main_column_right"></div>
+
+        </div>
+    </main>
+    <footer th:replace="home::home_footer"></footer>
+</body>
+</html>

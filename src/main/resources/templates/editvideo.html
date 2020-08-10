@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:1="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:fragment="editvideo_head">
+    <title>Волинська філія КРРТ</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/pagination.css" th:href="@{/css/pagination.css}">
+    <link rel="stylesheet" href="../static/css/edit.css" th:href="@{/css/edit.css}">
+    <link rel="icon" href="../static/images/favicon.ico" type="image/x-icon" th:href="@{/images/favicon.ico}"/>
+    <script type="text/javascript" src="../static/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script type="text/javascript" src="../static/js/editvideo.js" th:src="@{/js/editvideo.js}"></script>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="addnew">
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Вихід"/>
+                    <span th:inline="text">[[${#httpServletRequest.remoteUser}]]</span>
+                </form>
+                <div>
+                    <form method="post" action="/editvideo/item">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <button type="submit">Додати запис</button>
+                    </form>
+                </div>
+            </div>
+            <div class="news">
+                <table class="tb">
+                    <thead>
+                        <tr style="background-color: #cd9a17">
+                            <th>Id</th>
+                            <th>Дата</th>
+                            <th>Заголовок</th>
+                            <th>Файл</th>
+                            <th>Файл відео</th>
+                            <th>Дії</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div th:each="item:${editvideo}" th:remove="tag">
+                            <tr>
+                                <td th:text="${item.id}" style="width: 30px"></td>
+                                <td th:text="${#dates.format(item.date,'dd.MM.yyyy HH:mm')}" style="width: 80px"></td>
+                                <td th:text="${item.title}"></td>
+                                <td th:text="${item.filename}"></td>
+                                <td th:text="${item.videofilename}"></td>
+                                <td style="width: 100px; text-align: center; vertical-align: top">
+                                    <form method="post" th:action="@{'/editvideo/item/'+${item.id}}">
+                                        <input type="submit" value="Редагувати" style="margin-bottom: 5px">
+                                    </form>
+                                    <form method="post" th:action="@{'/editvideo/delete/'+${item.id}}">
+                                        <button name="btdelete" type="submit" style="margin-bottom: 5px">Вилучити</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="pagination-container">
+            <div class="paginationjs">
+                <div class="paginationjs-pages">
+                    <ul th:utext="${pageband}">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

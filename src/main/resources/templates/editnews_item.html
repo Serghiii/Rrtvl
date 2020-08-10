@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:1="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="editnews::editnews_head"></head>
+<body>
+    <main>
+        <div class="container">
+            <form action="#" th:action="@{/editnews/item/put}" th:object="${editnews_item}" method="post">
+                <input name="id" type="hidden" th:field="*{id}">
+                <p>Дата<br>
+                    <input name="date" type="datetime" required th:value="*{#dates.format(date,'dd.MM.yyyy HH:mm')}">
+                </p>
+                <p>Заголовок<br>
+                    <input class="content" name="title" type="text" maxlength="255" required th:field="*{title}">
+                </p>
+                <p>Опис<br>
+                    <textarea class="content" name="description" rows="3" maxlength="255" style="font-family: Arial" th:field="*{description}"></textarea>
+                </p>
+                <p>Стаття<br>
+                    <textarea class="content" name="content" rows="10" style="font-family: Arial" th:field="*{content}"></textarea>
+                </p>
+                <p>Малюнок<br>
+                    <img class="photo" th:src="*{img == null}?null:@{'data:image/jpg;base64,' +*{T(org.springframework.util.Base64Utils).encodeToString(img)}}" alt="">
+                    <input name="img" type="hidden" th:value="*{img == null}?null:*{T(org.springframework.util.Base64Utils).encodeToString(img)}">
+                    <button class="btclear" type="button">Очистити</button>
+                    <span style="font-size: 12px">Увага: ширина зображення не повинна перевищувати 640 пікселей!</span>
+                    <input type="file" accept="image/jpeg, image/png" style="width: 620px">
+                </p>
+                <div><input type="submit" value="Застосувати"></div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="home::home_head"></head>
+<body class="blue_bgc">
+    <header th:replace="home::home_header"></header>
+    <main class="blue_bgc">
+        <div class="main_column clearfix">
+
+            <div class="main_column_left">
+                <div class="pagination_margin">
+                    <div class="big_ref">
+                        <a class="bold" href="/photo?page=1">Фото</a>
+                    </div>
+                    <div class="central_blok clearfix">
+                        <div class="ni_data">
+                            <div class="cards">
+                                <div class="card" th:each="item:${photo}">
+                                    <a th:href="'/photo?id='+${item.id}"><img th:src="'/cards/photo/'+${item.id}+'/'+${item.filename}" alt=""/><br><span th:utext="${item.title}+'<br>'+${#dates.format(item.date, 'dd.MM.yyyy')}"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pagination-container">
+                    <div class="paginationjs">
+                        <div class="paginationjs-pages">
+                            <ul th:utext="${pageband}">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main_column_right"></div>
+
+        </div>
+    </main>
+    <footer th:replace="home::home_footer"></footer>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:1="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:fragment="home_head" th:remove="tag">
+    <title>Волинська філія КРРТ</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="телевізійне мовлення, радіомовлення, радіозв'язок, телебачення, волинська філія, ковель">
+    <meta name="description" content="Концерн радіомовлення, радіозв'язку та телебачення, Волинська філія.">
+    <link rel="stylesheet" href="../static/css/fontawesome-all.css" th:href="@{/css/fontawesome-all.css}">
+    <link rel="stylesheet" href="../static/css/fonts.css" th:href="@{/css/fonts.css}">
+    <link rel="stylesheet" href="../static/css/pagination.css" th:href="@{/css/pagination.css}">
+    <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
+    <link rel="icon" href="../static/images/favicon.ico" type="image/x-icon" th:href="@{/images/favicon.ico}"/>
+    <script type="text/javascript" src="../static/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script type="text/javascript" src="../static/js/main.js" th:src="@{/js/main.js}"></script>
+</head>
+<body class="blue_bgc">
+    <header class="blue_bgc clearfix" th:fragment="home_header">
+        <div class="header_top lightblue">
+            <div class="header_top_title f17 bold upper">
+                Концерн радіомовлення,<br>радіозв'язку та телебачення<br>Волинська філія
+            </div>
+            <div class="header_top_contacts f12">
+                <em>тел: <ins>(03352)5-99-81</ins>,<br>м.Ковель, вул.Варшавська, 5</em>
+            </div>
+        </div>
+        <div class="header_menu gradient">
+            <nav class="top-menu">
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i>Головна</a></li>
+                    <li><a href="#"><i class="fas fa-broadcast-tower"></i>Концерн</a>
+                        <ul>
+                            <li><a href="/about">Про нас</a></li>
+                            <li><a href="/contacts">Контакти</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><i class="fas fa-cogs"></i>Послуги</a>
+                        <ul>
+                            <li><a href="/tvbroadcasting">Телевізійне&nbsp;мовлення</a></li>
+                            <li><a href="/radio">Радіомовлення</a></li>
+                            <li><a href="/distnetworks">Розподільчі&nbsp;мережі</a></li>
+                            <li><a href="/otherservices">Інші&nbsp;послуги</a></li>
+                            <li><a href="/tariffs">Тарифи</a></li>
+                            <li><a href="/graph">Графік профілактичних&nbsp;робіт</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><i class="fas fa-handshake"></i>Партнери</a>
+                        <ul>
+                            <li><a href="/tvchannels">TV&nbsp;канали</a></li>
+                            <li><a href="/fmradio">FM&nbsp;радіо</a></li>
+                            <li><a href="/cellular">Стільниковий&nbsp;зв'язок</a></li>
+                            <li><a href="/telecomservices">Оператори&nbsp;телекомунікацій</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><i class="fas fa-newspaper"></i>Прес-центр</a>
+                        <ul>
+                            <li><a href="/news?page=1">Новини</a></li>
+                            <li><a href="/video?page=1">Відео</a></li>
+                            <li><a href="/photo?page=1">Фото</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <form class="search_form" action="/search" method="get">
+                <input name="q"  type="search" th:value="${q}" placeholder="Пошук новин">
+                <button class="fas fa-search" type="submit"></button>
+            </form>
+        </div>
+    </header>
+    <main class="blue_bgc">
+        <div class="main_column clearfix">
+
+            <div class="main_column_left">
+                <div class="slider">
+                    <ul>
+                        <li><img src="/images/logo.jpg" alt=""></li>
+                        <li><img src="/images/mast.jpg" alt=""></li>
+                        <li><img src="/images/checkpoint.jpg" alt=""></li>
+                        <li><img src="/images/office.jpg" alt=""></li>
+                        <li><img src="/images/region.jpg" alt=""></li>
+                    </ul>
+                </div>
+                <div class="big_ref">
+                    <a class="bold" href="/">Послуги</a>
+                </div>
+                <div class="big_menu clearfix">
+                    <div style="margin-top:12px; position: relative">
+                        <a href="/tvbroadcasting"><img class="services_img" src="/images/topic1.jpg" alt=""></a>
+                        <a href="/radio"><img class="services_img" src="/images/topic2.jpg" alt=""></a>
+                        <a href="/distnetworks"><img class="services_img" src="/images/topic3.jpg" alt=""></a>
+                        <a href="/otherservices"><img class="services_img" src="/images/topic4.jpg" alt=""></a>
+                    </div>
+                </div>
+                <div class="big_ref" style="margin-bottom: -5px">
+                    <a class="bold" href="/news?page=1">Новини</a>
+                </div>
+                <div class="central_blok clearfix">
+                    <div class="cb_news_item" th:each="item:${news}">
+                        <div class="cb_img_item">
+                            <img th:src="*{item.img == null}?'/images/previewlogo_grey-2.png':@{'data:image/jpg;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(item.img)}}" alt="">
+                        </div>
+                        <div class="cb_no_content">
+                            <a class="bold" th:href="@{/news(id=${item.id})}" th:text="${item.title}"></a>
+                            <br><span class="cb_no_text" th:text="${item.description}"></span>
+                            <br><span class="cb_no_date" th:text="${#dates.format(item.date, 'dd.MM.yyyy')}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main_column_right_lp">
+                <div class="datetime_informer">
+                    <!-- clock widget start -->
+                    <script type="text/javascript"> var css_file=document.createElement("link"); css_file.setAttribute("rel","stylesheet"); css_file.setAttribute("type","text/css"); css_file.setAttribute("href","//s.bookcdn.com//css/cl/bw-cl-m200x.css"); document.getElementsByTagName("head")[0].appendChild(css_file); </script> <div id="tw_10_1112209036"><div style="width:200px; height:67px; margin: 0 auto;"><a href="http://hotelmix.com.ua/time/kovel-127672">Ковель</a><br/></div></div> <script type="text/javascript"> function setWidgetData_1112209036(data){ if(typeof(data) != 'undefined' && data.results.length > 0) { for(var i = 0; i < data.results.length; ++i) { var objMainBlock = ''; var params = data.results[i]; objMainBlock = document.getElementById('tw_'+params.widget_type+'_'+params.widget_id); if(objMainBlock !== null) objMainBlock.innerHTML = params.html_code; } } } var clock_timer_1112209036 = -1; </script> <script type="text/javascript" charset="UTF-8" src="https://widgets.booked.net/time/info?ver=2&domid=966&type=10&id=1112209036&scode=124&city_id=127672&wlangid=29&mode=0&details=1&background=ffffff&color=333333&add_background=d0deff&add_color=000&head_color=000000&border=1&transparent=0"></script>
+                    <!-- clock widget end -->
+                </div>
+                <div class="gis_informer">
+                    <!-- Gismeteo informer START -->
+                    <link rel="stylesheet" type="text/css" href="https://s1.gismeteo.ua/static/css/informer2/gs_informerClient.min.css">
+                    <div id="gsInformerID-0nn4h1p4dMGbQS" class="gsInformer" style="width:200px;height:204px">
+                        <div class="gsIContent">
+                            <div id="cityLink">
+                                <a href="https://www.gismeteo.ua/ua/weather-kovel-4926/" title="Погода у Ковелі" target="_blank">
+                                    <img src="https://s1.gismeteo.ua/static/images/gisloader.svg" width="24" height="24" alt="Погода у Ковелі">
+                                </a>
+                            </div>
+                            <div class="gsLinks">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div class="leftCol">
+                                                <a href="https://www.gismeteo.ua/ua/" target="_blank" title="Погода">
+                                                    <img alt="Погода" src="https://s1.gismeteo.ua/static/images/informer2/logo-mini2.png" align="middle" border="0" height="16" width="11"/>
+                                                    <img src="https://s1.gismeteo.ua/static/images/gismeteo.svg" border="0" align="middle" style="left: 5px; top:1px">
+                                                </a>
+                                            </div>
+                                            <div class="rightCol">
+                                                <a href="https://www.gismeteo.ua/ua/weather-kovel-4926/14-days/" target="_blank" title="Погода у Ковелі на 2 тижні">
+                                                    <img src="https://s1.gismeteo.ua/static/images/informer2/forecast-2weeks.ua.svg" border="0" align="middle" style="top:auto" alt="Погода у Ковелі на 2 тижні">
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <script src="https://www.gismeteo.ua/ajax/getInformer/?hash=0nn4h1p4dMGbQS" type="text/javascript"></script>
+                    <!-- Gismeteo informer END -->
+                </div>
+                <div class="gis_informer">
+                    <!-- Gismeteo informer START -->
+                    <link rel="stylesheet" type="text/css" href="https://s1.gismeteo.ua/static/css/informer2/gs_informerClient.min.css">
+                    <div id="gsInformerID-p65D45037JaG7n" class="gsInformer" style="width:200px;height:287px">
+                        <div class="gsIContent">
+                            <div id="cityLink">
+                                <a href="https://www.gismeteo.ua/ua/weather-lutsk-4928/" title="Погода у Луцьку" target="_blank">
+                                    <img src="https://s1.gismeteo.ua/static/images/gisloader.svg" width="24" height="24" alt="Погода у Луцьку">
+                                </a>
+                            </div>
+                            <div class="gsLinks">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div class="leftCol">
+                                                <a href="https://www.gismeteo.ua/ua/" target="_blank" title="Погода">
+                                                    <img alt="Погода" src="https://s1.gismeteo.ua/static/images/informer2/logo-mini2.png" align="middle" border="0" height="16" width="11"/>
+                                                    <img src="https://s1.gismeteo.ua/static/images/gismeteo.svg" border="0" align="middle" style="left: 5px; top:1px">
+                                                </a>
+                                            </div>
+                                            <div class="rightCol">
+                                                <a href="https://www.gismeteo.ua/ua/weather-lutsk-4928/14-days/" target="_blank" title="Погода у Луцьку на 2 тижні">
+                                                    <img src="https://s1.gismeteo.ua/static/images/informer2/forecast-2weeks.ua.svg" border="0" align="middle" style="top:auto" alt="Погода у Луцьку на 2 тижні">
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <script src="https://www.gismeteo.ua/ajax/getInformer/?hash=p65D45037JaG7n" type="text/javascript"></script>
+                    <!-- Gismeteo informer END -->
+                </div>
+                <div class="refs">
+                    <div class="refs_title">
+                        Посилання на сайти
+                    </div>
+                    <a href="http://rrt.ua" target="_blank"><img src="/images/rrt.jpg" alt=""></a>
+                    <a href="http://kovelrada.gov.ua" target="_blank"><img src="/images/kovelrada.jpg" alt=""></a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <footer class="blue_bgc" th:fragment="home_footer">
+        <div class="footer_column gradient">
+            <h6 class="footer_txt">©2018 Волинська філія КРРТ</h6>
+        </div>
+    </footer>
+</body>
+</html>

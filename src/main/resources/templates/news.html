@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="home::home_head"></head>
+<body class="blue_bgc">
+    <header th:replace="home::home_header"></header>
+    <main class="blue_bgc">
+        <div class="main_column clearfix">
+
+            <div class="main_column_left" style="position: relative;">
+                <div class="pagination_margin">
+                    <div class="big_ref">
+                        <a class="bold" href="/news?page=1">Новини</a>
+                    </div>
+                    <div class="central_blok clearfix">
+                        <div class="cb_news_item2" th:each="item:${news}">
+                            <div class="cb_img_item">
+                                <img th:src="*{item.img == null}?'/images/previewlogo_grey.png':@{'data:image/jpg;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(item.img)}}" alt="">
+                            </div>
+                            <div class="cb_no_content">
+                                <a class="bold" th:href="@{/news(id=${item.id})}" th:text="${item.title}"></a>
+                                <br><span class="cb_no_text" th:text="${item.description}"></span>
+                                <br><span class="cb_no_date" th:text="${#dates.format(item.date, 'dd.MM.yyyy')}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pagination-container">
+                    <div class="paginationjs">
+                        <div class="paginationjs-pages">
+                            <ul th:utext="${pageband}">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main_column_right"></div>
+
+        </div>
+    </main>
+    <footer th:replace="home::home_footer"></footer>
+</body>
+</html>

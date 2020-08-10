@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:1="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="editvideo::editvideo_head"></head>
+<body>
+    <main>
+        <div class="container">
+            <form action="#" th:action="@{/editvideo/item/put}" th:object="${editvideo_item}" enctype="multipart/form-data" method="post">
+                <input name="id" type="hidden" th:field="*{id}">
+                <p>Дата<br>
+                    <input name="date" type="datetime" required th:value="*{#dates.format(date,'dd.MM.yyyy HH:mm')}">
+                </p>
+                <p>Заголовок<br>
+                    <input class="content" name="title" type="text" maxlength="255" required th:field="*{title}">
+                </p>
+                <p>Малюнок<br>
+                    <img th:src="'/cards/video/'+*{id}+'/'+*{filename}" alt="" style="width: 203px; height: 140px;"/>
+                    <span style="font-size: 12px">Увага: розмір зображення має бути 203 х 140 пікселів!</span>
+                    <input name="filename" type="hidden" th:field="*{filename}">
+                    <input name="file" type="file" accept="image/jpeg, image/png" style="width: 620px">
+                </p>
+                <p>Відео<br>
+                    <input name="videofilename" type="text" th:field="*{videofilename}" style="width: 620px"><br>
+                    <span style="font-size: 12px">Виберіть відео для завантаження. Розмір файла не повинен перевищувати 128MB.</span>
+                    <input name="videofile" type="file" accept="video/*" style="width: 620px">
+                </p>
+                <div><input type="submit" value="Застосувати"></div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
