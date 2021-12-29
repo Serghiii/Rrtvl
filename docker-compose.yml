@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  tomcat:
+    image: rrt
+    container_name: rrt
+    ports:
+      - 80:80
+    volumes:
+      - type: bind
+        source: c:/docker/tomcat/webapps
+        target: /usr/local/tomcat/webapps
+        # volume:
+        # nocopy: true # flag to disable copying of data from a container when a volume is created
+      - type: bind
+        source: c:/home/gallery
+        target: /home/gallery
+        # volume:
+        # nocopy: true # flag to disable copying of data from a container when a volume is created
+        # - c:/docker/tomcat/webapps:/usr/local/tomcat/webapps
+    restart: always
